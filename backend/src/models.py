@@ -1,8 +1,10 @@
+from sqlalchemy.orm import relationship
+
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 # database_name = 'sof-clone'
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 
 database_path = 'postgresql://pravinderreddy@localhost:5432/sof-clone'
 
@@ -30,11 +32,17 @@ User
 
 
 class User(db.Model):
-    __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
-    name = Column(String, unique=True)
+    name = Column(String, unique=True, nullable=False)
+    posts = relationship('Question', backref='user')
 
     def __init__(self, name):
         self.name = name
 
-    
+
+class Question(db.Model):
+    id = db.Column(Integer, primary_key=True)
+    title = db.Column(String, nullable=False)
+    body = db.Column(String, nullable=False)
+    tags = db.Column(String, nullable=False)
+    user_id = db.Column(Integer, ForeignKey('user.id'))
