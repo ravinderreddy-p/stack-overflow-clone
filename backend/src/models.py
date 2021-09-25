@@ -37,14 +37,4 @@ class User(db.Model):
     def __init__(self, name):
         self.name = name
 
-    def insert(self):
-        db.session.add()
-        db.session.commit()
-
-    def update(self):
-        db.session.commit()
-
-    def format(self):
-        return {
-            'user': self.name
-        }
+    

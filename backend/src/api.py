@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, abort
 from flask_cors import CORS
+from src.add_user import AddUser
 
 from src.models import setup_db, User, db
 
@@ -16,14 +17,10 @@ def hell_world():
 @app.route('/api/addUser', methods=['POST'])
 def add_user():
     body = request.get_json()
-    user_name = body.get('username')
-    user = User(name=user_name)
-    db.session.add(user)
-    db.session.commit()
-    # user.insert()
+    username = AddUser().create_a_user(body)
     return jsonify({
-        "user": user_name,
-        "success": "true"
+        'user': username,
+        'success': True
     })
 
 
