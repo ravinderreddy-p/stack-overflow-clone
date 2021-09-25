@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, abort
 from flask_cors import CORS
 
 from src.models import setup_db, User, db
@@ -29,5 +29,16 @@ def add_user():
 
 @app.route('/api/authenticate', methods=['GET', 'POST'])
 def authenticate():
-    return "User authenticated"
+    body = request.get_json()
+    username = body['username']
+    user = User.query.filter_by(name=username).one_or_none()
+
+    if user is None:
+        abort(404)
+
+    return jsonify({
+        'success': True,
+        'status': 200,
+        'message': username + ' Authenticated successfully'
+    })
 
