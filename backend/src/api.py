@@ -4,6 +4,7 @@ from src.add_question import AddQuestion
 from src.add_user import AddUser
 
 from src.models import setup_db, User, db, Question
+from src.update_question import UpdateQuestion
 
 app = Flask(__name__)
 setup_db(app)
@@ -41,7 +42,7 @@ def authenticate():
     })
 
 
-@app.route('/api/question', methods=['POST'])
+@app.route('/api/question/create', methods=['POST'])
 def post_question():
     req_body = request.get_json()
     question = AddQuestion().add_a_question(req_body)
@@ -49,4 +50,18 @@ def post_question():
         'success': True,
         'status': 200,
         'message': question.title + ' added successfully'
+    })
+
+
+@app.route('/api/question/<int:id>/edit', methods=['POST'])
+def edit_question(id):
+    req_body = request.get_json()
+    status_code = UpdateQuestion().update_question(req_body, id)
+    if status_code == 404:
+        abort(404)
+
+    return jsonify({
+        'success': True,
+        'status': 200,
+        'message': 'Question updated successfully'
     })
