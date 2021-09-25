@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, abort
 from flask_cors import CORS
+from src.add_question import AddQuestion
 from src.add_user import AddUser
 
 from src.models import setup_db, User, db, Question
@@ -42,16 +43,10 @@ def authenticate():
 
 @app.route('/api/question', methods=['POST'])
 def post_question():
-    body = request.get_json()
-    title = body['title']
-    content = body['content']
-    tags = body['tags']
-    user_id = body['user_id']
-    question = Question(title=title, body=content, tags=tags, user_id=user_id)
-    db.session.add(question)
-    db.session.commit()
+    req_body = request.get_json()
+    question = AddQuestion().add_a_question(req_body)
     return jsonify({
         'success': True,
         'status': 200,
-        'message': title + ' added successfully'
+        'message': question.title + ' added successfully'
     })
