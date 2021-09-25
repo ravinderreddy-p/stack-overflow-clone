@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify, abort
 from flask_cors import CORS
+from src.add_answer import AddAnswer
 from src.add_question import AddQuestion
 from src.add_user import AddUser
 
-from src.models import setup_db, User, db, Question
+from src.models import setup_db, User, db, Question, Answer
 from src.update_question import UpdateQuestion
 
 app = Flask(__name__)
@@ -64,4 +65,15 @@ def edit_question(id):
         'success': True,
         'status': 200,
         'message': 'Question updated successfully'
+    })
+
+
+@app.route('/api/question/<int:id>/answer', methods=['POST'])
+def add_answer(id):
+    req_body = request.get_json()
+    answer = AddAnswer().add_answer(req_body, id)
+    return jsonify({
+        'success': True,
+        'status': 200,
+        'message': 'Answered successfully.'
     })
