@@ -7,3 +7,8 @@ app = Flask(__name__)
 def hell_world():
     return "Hello world!"
 
+
+@app.route("/api/authenticate")
+def authenticate():
+    return "User authenticated"
+
