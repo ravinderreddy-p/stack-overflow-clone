@@ -36,6 +36,7 @@ class User(db.Model):
     name = Column(String, unique=True, nullable=False)
     posts = relationship('Question', backref='user')
     answers = relationship('Answer', backref='user')
+    comments = relationship('Comment', backref='user')
 
     def __init__(self, name):
         self.name = name
@@ -48,6 +49,7 @@ class Question(db.Model):
     tags = db.Column(String, nullable=False)
     user_id = db.Column(Integer, ForeignKey('user.id'))
     answers = relationship('Answer', backref='question')
+    comments = relationship('Comment', backref='question')
 
 
 class Answer(db.Model):
@@ -56,3 +58,12 @@ class Answer(db.Model):
     is_accepted = db.Column(Boolean)
     question_id = db.Column(Integer, ForeignKey('question.id'))
     user_id = db.Column(Integer, ForeignKey('user.id'))
+    comments = relationship('Comment', backref='answer')
+
+
+class Comment(db.Model):
+    id = db.Column(Integer, primary_key=True)
+    text = db.Column(String, nullable=False)
+    user_id = db.Column(Integer, ForeignKey('user.id'))
+    question_id = db.Column(Integer, ForeignKey('question.id'))
+    answer_id = db.Column(Integer, ForeignKey('answer.id'))
