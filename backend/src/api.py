@@ -10,12 +10,21 @@ from src.update_question import UpdateQuestion
 
 app = Flask(__name__)
 setup_db(app)
-CORS(app, resources={r"/api/*": {"origins": '*'}})
+# CORS(app, resources={r"/api/*": {"origins": '*'}})
 
 
-@app.route('/')
+# @app.after_request
+# def after_request(response):
+#     response.headers.add('Access-Control-Allow-Origin', 'http://localhost:4200')
+#     # response.headers.add('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE, OPTIONS')
+#     return response
+
+
+@app.route('/api/')
 def hell_world():
-    return "Hello world!"
+    return jsonify({
+        'message': 'Hello World!'
+    })
 
 
 @app.route('/api/addUser', methods=['POST'])
@@ -28,18 +37,25 @@ def add_user():
     })
 
 
-@app.route('/api/authenticate', methods=['GET', 'POST'])
-def authenticate():
-    body = request.get_json()
-    username = body['username']
+@app.route('/api/authenticate/<string:username>', methods=['GET'])
+def authenticate(username):
+    # body = request.get_json()
+    # username = body['username']
     user = User.query.filter_by(name=username).one_or_none()
 
     if user is None:
-        abort(404)
+        return jsonify({
+            'success': False,
+            'status': 404,
+            'username': username,
+            'message': username + ' not authorized.'
+        })
+        # abort(404)
 
     return jsonify({
         'success': True,
         'status': 200,
+        'username': username,
         'message': username + ' Authenticated successfully'
     })
 
