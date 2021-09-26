@@ -5,6 +5,7 @@ export class UserAuthenication {
   constructor(
     public message: string,
     public username: string,
+    public id: number,
     public status: number,
     public success: boolean
   ){}
@@ -29,5 +30,6 @@ export class AuthenticationService {
   }
   logout() {
     sessionStorage.removeItem('authenticatedUser')
+    sessionStorage.removeItem('id')
   }
 }
