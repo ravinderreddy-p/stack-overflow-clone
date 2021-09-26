@@ -42,11 +42,6 @@ export class LoginComponent implements OnInit {
       this.unauthorizedMessage = response.message;
       this.isSuccessLogin = false;
     }
-    // console.log(this.username);
-    // console.log(response.message);
-    // console.log(this.unauthorizedMessage);
-    // console.log(response.status);
-    // console.log(response.success);
     
   }
 

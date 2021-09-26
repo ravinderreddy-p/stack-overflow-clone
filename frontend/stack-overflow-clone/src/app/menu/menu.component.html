@@ -4,13 +4,13 @@
             <a href="" class="navbar-brand">StackOverflow-Clone</a>
         </div>
         <ul class="navbar-nav">
-            <li><a routerLink="dashboard" class="nav-link">Home</a></li>
-            <li><a routerLink="dashboard" class="nav-link">Questions</a></li>
+            <li><a *ngIf="authService.isUserLoggedIn()" routerLink="dashboard" class="nav-link">Home</a></li>
+            <li><a *ngIf="authService.isUserLoggedIn()" routerLink="dashboard" class="nav-link">Questions</a></li>
         </ul>
 
         <ul class="navbar-nav navbar-collapse justify-content-end">
-                <li><a routerLink="login" class="nav-link">Login</a></li>
-                <li><a routerLink="logout" class="nav-link">Logout</a></li>
+                <li><a *ngIf="!authService.isUserLoggedIn()" routerLink="login" class="nav-link">Login</a></li>
+                <li><a *ngIf="authService.isUserLoggedIn()" routerLink="logout" class="nav-link">Logout</a></li>
             </ul>
     </nav>
 </header>
