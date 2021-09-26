@@ -10,7 +10,7 @@ from src.update_question import UpdateQuestion
 
 app = Flask(__name__)
 setup_db(app)
-# CORS(app, resources={r"/api/*": {"origins": '*'}})
+CORS(app, resources={r"/api/*": {"origins": '*'}})
 
 
 # @app.after_request
@@ -37,7 +37,7 @@ def add_user():
     })
 
 
-@app.route('/api/authenticate/<string:username>', methods=['GET'])
+@app.route('/api/authenticate/<string:username>/', methods=['GET'])
 def authenticate(username):
     # body = request.get_json()
     # username = body['username']

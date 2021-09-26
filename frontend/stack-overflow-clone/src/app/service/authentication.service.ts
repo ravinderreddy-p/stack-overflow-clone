@@ -1,18 +1,26 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+export class UserAuthenication {
+  constructor(
+    public message: string,
+    public username: string,
+    public status: number,
+    public success: boolean
+  ){}
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   authenticate(username){
-    if(username == 'ravi'){
-      sessionStorage.setItem('authenticatedUser', username);
-      return true;
-    }
-    return false;
+    return this.http.get<UserAuthenication>(`http://127.0.0.1:5000/api/authenticate/${username}`);
   }
 
   isUserLoggedIn(){

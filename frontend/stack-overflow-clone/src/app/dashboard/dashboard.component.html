@@ -1,4 +1,10 @@
 Welcome {{name}}. Welcome to our App.
-<div>
-    
+<div class="container">
+    Welcome.
+    <button (click)="getWelcomeMessage()" class="btn btn-success">Welcome</button>
+</div>
+
+<div class="container" *ngIf="messageFromService">
+    <h2>Customized Message from Service</h2>
+    {{messageFromService}}
 </div>

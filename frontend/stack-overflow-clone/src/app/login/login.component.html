@@ -11,4 +11,7 @@
     <div>
         <button class="btn btn-success" (click)="handleLogin()" type="button"> Login</button>
     </div>  
+    <div *ngIf="!isSuccessLogin">
+        {{ unauthorizedMessage }}
+    </div>
 </div>
