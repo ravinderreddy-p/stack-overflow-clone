@@ -56,6 +56,7 @@ def authenticate(username):
         'success': True,
         'status': 200,
         'username': username,
+        'id': user.id,
         'message': username + ' Authenticated successfully'
     })
 
@@ -69,6 +70,12 @@ def post_question():
         'status': 200,
         'message': question.title + ' added successfully'
     })
+
+
+@app.route('/api/questions/all/', methods=['GET'])
+def get_all_questions():
+    questions = AddQuestion().get_all_questions()
+    return jsonify({'questions': questions})
 
 
 @app.route('/api/question/<int:id>/edit', methods=['POST'])

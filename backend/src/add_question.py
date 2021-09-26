@@ -14,3 +14,16 @@ class AddQuestion(object):
         db.session.add(question)
         db.session.commit()
         return question
+
+    def get_all_questions(self):
+        questions = Question.query.all()
+        questions_list = []
+        for question in questions:
+            question_json = {
+                'id': question.id,
+                'tags': question.tags,
+                'title': question.title,
+                'body': question.body
+            }
+            questions_list.append(question_json)
+        return questions_list
