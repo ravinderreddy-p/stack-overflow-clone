@@ -1,17 +1,17 @@
 <div class="container">
     <div>
-        <h2>Welcome to Stack Overflow Clone App</h2>
+        <h2>Welcome to Stack Overflow(Clone) App</h2>
     </div>
     <div>
         <form>
             <label>User Name: </label>
-            <input type="text" name="username" [(ngModel)]="username">
+            <input type="text" name="username" [(ngModel)]="userName">
         </form>
     </div> 
     <div>
         <button class="btn btn-success" (click)="handleLogin()" type="button"> Login</button>
     </div>  
     <div *ngIf="!isSuccessLogin">
-        {{ unauthorizedMessage }}
+        {{ unAuthorizedMessage }}
     </div>
 </div>

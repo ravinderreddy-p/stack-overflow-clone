@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { WelcomeDataService } from '../service/data/welcome-data.service';
+import { QuestionsDataService, Questions } from '../service/data/questions-data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,34 +8,34 @@ import { WelcomeDataService } from '../service/data/welcome-data.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  name = ''
-  messageFromService: string;
+  public userName: string = ''
+  public questions: Questions[];
+  public responseStatus: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
-    private service: WelcomeDataService,
+    private service: QuestionsDataService,
   ) { }
 
   ngOnInit(): void {
-    this.name = this.route.snapshot.params['name'];
+    this.userName = sessionStorage.getItem('authenticatedUser');
+    // this.getAllQuestions();
   }
 
-  getWelcomeMessage(){
-    // console.log(this.service.executeHelloWorldService());
-    this.service.executeHelloWorldService().subscribe(
+  getAllQuestions(){
+    this.service.callToGetAllQuestions().subscribe(
       response => this.handleSuccessfulResponse(response),
       error => this.handleErrorResponse(error)
     );
   }
 
   handleSuccessfulResponse(response){
-    this.messageFromService = response.message;
-    console.log(response);
-    console.log(response.message);
+    this.responseStatus = response.success;
+    this.questions = response.questions;
   }
 
   handleErrorResponse(error){
-    this.messageFromService = error.error.message;
+    this.responseStatus = error.error.message;
   }
 
 }

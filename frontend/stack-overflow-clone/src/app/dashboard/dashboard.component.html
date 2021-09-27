@@ -1,10 +1,29 @@
-Welcome {{name}}. Welcome to our App.
 <div class="container">
-    Welcome.
-    <button (click)="getWelcomeMessage()" class="btn btn-success">Welcome</button>
+    Welcome to our app {{userName}}
 </div>
 
-<div class="container" *ngIf="messageFromService">
-    <h2>Customized Message from Service</h2>
-    {{messageFromService}}
+<div class="container">
+    <button (click)="getAllQuestions()" class="btn btn-success">All Questions</button>
+</div>
+
+<div class="container" *ngIf="responseStatus">
+    <table border="1">
+        <caption style="caption-side:top">All Questions</caption>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Body</th>
+                <th>Tags</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let question of questions">
+                <td>{{question.id}}</td>
+                <td>{{question.title}}</td>
+                <td>{{question.body}}</td>
+                <td>{{question.tags}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

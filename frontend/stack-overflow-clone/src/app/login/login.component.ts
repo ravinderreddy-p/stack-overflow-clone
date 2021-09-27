@@ -8,12 +8,11 @@ import { AuthenticationService } from '../service/authentication.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  username = ''
-  unauthorizedMessage = ''
-  errorMessage = 'Invalid login'
-  invalidLogin = false;
-  isSuccessLogin = true;
+  public userName = ''
+  public unAuthorizedMessage = ''
+  public errorMessage = 'Invalid login'
+  public invalidLogin = false;
+  public isSuccessLogin = true;
 
   constructor(
     private router: Router,
@@ -25,7 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   handleLogin() {
-    this.authenicationService.authenticate(this.username).subscribe(
+    this.authenicationService.authenticate(this.userName).subscribe(
       response => this.handleSuccessfulResponse(response),
       error => this.handleErrorResponse(error)
     )
@@ -33,14 +32,13 @@ export class LoginComponent implements OnInit {
   }
 
   handleSuccessfulResponse(response){
-    this.username = response.username;
     if (response.success) {
-      sessionStorage.setItem('authenticatedUser', this.username);
       sessionStorage.setItem('id', response.id);
+      sessionStorage.setItem('authenticatedUser', this.userName);
       this.router.navigate(['dashboard', response.id])
     }
     else {
-      this.unauthorizedMessage = response.message;
+      this.unAuthorizedMessage = response.message;
       this.isSuccessLogin = false;
     }
     

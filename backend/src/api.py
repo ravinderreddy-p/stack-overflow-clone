@@ -75,7 +75,11 @@ def post_question():
 @app.route('/api/questions/all/', methods=['GET'])
 def get_all_questions():
     questions = AddQuestion().get_all_questions()
-    return jsonify({'questions': questions})
+    return jsonify({
+        'success': True,
+        'status': 200,
+        'questions': questions
+    })
 
 
 @app.route('/api/question/<int:id>/edit', methods=['POST'])
