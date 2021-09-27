@@ -1,1 +1,34 @@
-<p>show-question works!</p>
+<div class="container">
+    <div>
+        <h1>{{question_title}}</h1>
+    </div>
+    <div>
+
+    </div>
+    <div>
+        <h3>{{question_body}}</h3>
+    </div>
+    <div>
+
+    </div>
+    <div>
+        <h6>{{question_tags}}</h6>
+    </div>
+    <div>
+        <h4><a href="#">Add a comment</a> </h4>
+    </div>
+    <div>
+        <h1>{{answers_length}} Answers</h1>
+        <ul>
+            <li *ngFor="let answer of answers">
+                <h4>{{answer.answer}}</h4>
+                <h6>- By: {{answer.answeredBy}}</h6>
+            </li>
+        </ul>
+        
+    </div>
+
+    <div>
+        <h4><a href="#">Post your answer</a> </h4>
+    </div>
+</div>

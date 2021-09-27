@@ -82,6 +82,16 @@ def get_all_questions():
     })
 
 
+@app.route('/api/questions/<int:question_id>/', methods=['GET'])
+def get_a_question(question_id):
+    question = AddQuestion().get_a_question(question_id)
+    return jsonify({
+        'success': True,
+        'status': 200,
+        'question': question
+    })
+
+
 @app.route('/api/questions/<int:id>/edit/', methods=['POST'])
 def edit_question(id):
     req_body = request.get_json()

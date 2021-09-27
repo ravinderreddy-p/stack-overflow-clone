@@ -1,4 +1,4 @@
-from src.models import Question, db
+from src.models import Question, db, Answer, User
 
 
 class AddQuestion(object):
@@ -27,3 +27,29 @@ class AddQuestion(object):
             }
             questions_list.append(question_json)
         return questions_list
+
+    def get_a_question(self, question_id):
+        question = Question.query.filter_by(id=question_id).first()
+        answers = Answer.query.with_entities(Answer.id, Answer.content, Answer.is_accepted, User.name).\
+            join(User, Answer.user_id == User.id).\
+            filter(Answer.question_id == question_id).all()
+        answer_list = []
+        if answers is None:
+            answer_list = []
+        else:
+            for ans in answers:
+                ans_json = {
+                    'answer_id': ans.id,
+                    'answer': ans.content,
+                    'isAccepted': ans.is_accepted,
+                    'answeredBy': ans.name,
+                }
+                answer_list.append(ans_json)
+        question_json = {
+            'id': question.id,
+            'title': question.title,
+            'body': question.body,
+            'tags': question.tags,
+            'answers': answer_list
+        }
+        return question_json
