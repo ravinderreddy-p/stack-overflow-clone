@@ -1,19 +1,26 @@
-<table border="1"> 
-    <caption style= "caption-side:top">Top Questions</caption>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Body</th>
-            <th>Tags</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let question of questions">
-            <td>{{question.id}}</td>
-            <td>{{question.title}}</td>
-            <td>{{question.body}}</td>
-            <td>{{question.tags}}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="container">
+    <div>
+        <h1>Ask a public question</h1>
+    </div>
+    <div>
+        <form>
+            <label>Title: </label>
+            <input type="text" name="title" [(ngModel)]="title">
+        </form>
+    </div>
+    <div>
+        <form>
+            <label>Body: </label>
+            <input type="text" name="body" [(ngModel)]="body">
+        </form>
+    </div>
+    <div>
+        <form>
+            <label>Tags: </label>
+            <input type="text" name="tags" [(ngModel)]="tags">
+        </form>
+    </div>
+    <div>
+        <button class="btn btn-success" (click)="submitQuestion()" type="button"> Submit</button>
+    </div>
+</div>

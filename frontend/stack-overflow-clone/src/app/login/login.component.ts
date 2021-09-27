@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     if (response.success) {
       sessionStorage.setItem('id', response.id);
       sessionStorage.setItem('authenticatedUser', this.userName);
-      this.router.navigate(['dashboard', response.id])
+      this.router.navigate(['dashboard'])
     }
     else {
       this.unAuthorizedMessage = response.message;

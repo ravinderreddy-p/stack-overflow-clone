@@ -16,7 +16,7 @@ CORS(app, resources={r"/api/*": {"origins": '*'}})
 # @app.after_request
 # def after_request(response):
 #     response.headers.add('Access-Control-Allow-Origin', 'http://localhost:4200')
-#     # response.headers.add('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE, OPTIONS')
+#     response.headers.add('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE, OPTIONS')
 #     return response
 
 
@@ -61,7 +61,7 @@ def authenticate(username):
     })
 
 
-@app.route('/api/question/create', methods=['POST'])
+@app.route('/api/questions/add/', methods=['POST'])
 def post_question():
     req_body = request.get_json()
     question = AddQuestion().add_a_question(req_body)
@@ -82,7 +82,7 @@ def get_all_questions():
     })
 
 
-@app.route('/api/question/<int:id>/edit', methods=['POST'])
+@app.route('/api/questions/<int:id>/edit/', methods=['POST'])
 def edit_question(id):
     req_body = request.get_json()
     status_code = UpdateQuestion().update_question(req_body, id)
@@ -96,7 +96,7 @@ def edit_question(id):
     })
 
 
-@app.route('/api/question/<int:id>/answer', methods=['POST'])
+@app.route('/api/questions/<int:id>/answer/', methods=['POST'])
 def add_answer(id):
     req_body = request.get_json()
     answer = AddAnswer().add_answer(req_body, id)
@@ -107,7 +107,7 @@ def add_answer(id):
     })
 
 
-@app.route('/api/question/<int:id>/comment', methods=['POST'])
+@app.route('/api/questions/<int:id>/comment/', methods=['POST'])
 def add_comment(id):
     req_body = request.get_json()
     comment = AddComment().comment_to_question(req_body, id)

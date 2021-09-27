@@ -7,7 +7,7 @@ class AddQuestion(object):
 
     def add_a_question(self, request_body):
         title = request_body.get('title')
-        content = request_body.get('content')
+        content = request_body.get('body')
         tags = request_body.get('tags')
         user_id = request_body.get('user_id')
         question = Question(title=title, body=content, tags=tags, user_id=user_id)

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { QuestionsDataService } from '../service/data/questions-data.service';
 
 @Component({
   selector: 'app-questions',
@@ -6,31 +8,44 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./questions.component.css']
 })
 export class QuestionsComponent implements OnInit {
+  public title: string;
+  public body: string;
+  public tags: string;
 
-  questions = [
-  {
-    id : 1,
-    title: 'Python issue',
-    body: 'Python code is not running',
-    tags: 'python'
-  },
-  {
-    id : 2,
-    title: 'Java issue',
-    body: 'Java code is not running',
-    tags: 'Java'
-  },
-  {
-    id : 3,
-    title: 'NodeJS issue',
-    body: 'NodeJS code is not running',
-    tags: 'Javascript'
-  }
-]
+  public data = {}
 
-  constructor() { }
+  responseStatus = ''
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private questionsDataService: QuestionsDataService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+
+  submitQuestion(){
+    this.data = {
+      'title': this.title,
+      'body': this.body,
+      'tags': this.tags,
+      'user_id': sessionStorage.getItem('id')
+    }
+    this.questionsDataService.callToPostAQuestion(this.data).subscribe(
+      response => this.handleSuccessfulResponse(response),
+      error => this.handleErrorResponse(error)
+    );
+  }
+
+  handleSuccessfulResponse(response){
+    this.responseStatus = response.success;
+    console.log(response.success)
+  }
+
+  handleErrorResponse(error){
+    this.responseStatus = error.error.message;
   }
 
 }
