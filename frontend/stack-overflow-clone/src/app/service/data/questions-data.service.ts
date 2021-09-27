@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export class Questions {
   constructor(
-    public id: number = -1,
+    public id: number,
     public tags: string,
     public title: string,
     public body: string

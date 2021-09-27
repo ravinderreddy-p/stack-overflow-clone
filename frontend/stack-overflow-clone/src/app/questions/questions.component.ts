@@ -18,7 +18,6 @@ export class QuestionsComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private questionsDataService: QuestionsDataService
   ) { }
 
@@ -46,6 +45,7 @@ export class QuestionsComponent implements OnInit {
 
   handleErrorResponse(error){
     this.responseStatus = error.error.message;
+    console.log(this.responseStatus);
   }
 
 }
