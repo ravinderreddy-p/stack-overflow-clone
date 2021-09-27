@@ -12,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LogoutComponent } from './logout/logout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { QuestionsComponent } from './questions/questions.component';
+import { ShowQuestionComponent } from './show-question/show-question.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { QuestionsComponent } from './questions/questions.component';
     MenuComponent,
     FooterComponent,
     LogoutComponent,
-    QuestionsComponent
+    QuestionsComponent,
+    ShowQuestionComponent
   ],
   imports: [
     BrowserModule,

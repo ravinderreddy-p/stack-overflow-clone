@@ -6,13 +6,15 @@ import { ErrorComponent } from './error/error.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RouteGuardService } from './service/route-guard.service';
 import { QuestionsComponent } from './questions/questions.component';
+import { ShowQuestionComponent } from './show-question/show-question.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [RouteGuardService] },
   { path: 'logout', component: LogoutComponent, canActivate: [RouteGuardService] },
-  { path: 'questions', component: QuestionsComponent },
+  { path: 'questions', component: QuestionsComponent, canActivate: [RouteGuardService] },
+  { path: 'questions/:id', component: ShowQuestionComponent },
   { path: '**', component: ErrorComponent },
 ];
 
