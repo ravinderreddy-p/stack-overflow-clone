@@ -2,10 +2,6 @@
     Welcome to our app {{userName}}
 </div>
 
-<div class="container">
-    <button (click)="getAllQuestions()" class="btn btn-success">All Questions</button>
-</div>
-
 <div class="container" *ngIf="responseStatus">
     <table border="1">
         <caption style="caption-side:top">All Questions</caption>

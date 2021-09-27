@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.userName = sessionStorage.getItem('authenticatedUser');
-    // this.getAllQuestions();
+    this.getAllQuestions();
   }
 
   getAllQuestions(){

@@ -41,7 +41,7 @@ export class QuestionsComponent implements OnInit {
 
   handleSuccessfulResponse(response){
     this.responseStatus = response.success;
-    console.log(response.success)
+    this.router.navigate(['dashboard']);
   }
 
   handleErrorResponse(error){
